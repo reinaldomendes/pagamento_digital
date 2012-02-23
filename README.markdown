@@ -1,5 +1,9 @@
 # PagamentoDigital
 
+## Atenção esta gem é ALPHA utilize por sua CONTA e RISCO
+### Não dou suporte para esta gem, faça um fork e modifique o quanto quiser
+
+
 Este é um plugin do Ruby on Rails que permite utilizar o [PagamentoDigital](www.pagamentodigital.com.br).
 
 ## SOBRE O PagamentoDigital
