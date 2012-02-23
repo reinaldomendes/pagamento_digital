@@ -53,13 +53,13 @@ hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
 
 %>
 
-<%=to_gen_md5%>
 
-<form action="<%=PagamentoDigital.gateway_url%>" method='post' >
+
+<form action="<%=PagamentoDigital.gateway_url%>" method='post' style="display:none">
   <%= hash_fields.map{ |k,v| label_tag{text_field_tag(k,v)+k} }.join("\n<br/>").html_safe   %>
   <%= submit_tag options[:submit] %>
 </form>
 
-<script>
-  document.getElementById('pagamento_digital_form').style.display='';
-</script>
+<%#*<script>%>
+  <%#*document.getElementById('pagamento_digital_form').style.display='';%>
+<%#*</script>%>
