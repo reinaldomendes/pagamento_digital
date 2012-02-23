@@ -82,7 +82,7 @@ module PagamentoDigital
         order["produto_valor_#{index}"] = to_price.call(order.delete("produto_valor_#{index}"))
         order["produto_qtde_#{index}"] = order.delete("produto_qtde_#{index}")        
         #soma produtos
-        sum_valor_produtos += order["produto_valor_#{index}"].to_f
+        sum_valor_produtos += order["produto_valor_#{index}"].to_f * order["produto_qtde_#{index}"]
       end
       
       order['frete'] = to_price.call(order.delete "frete")
