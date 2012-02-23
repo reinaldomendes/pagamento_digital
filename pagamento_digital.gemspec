@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Reinaldo Mendes"]
   s.email       = ["reinaldombox-blog@yahoo.com.br"]
 #  s.homepage    = "http://rubygems.org/gems/pagseguro"
-#  s.summary     = "The official PagSeguro library"
+  s.summary     = "Pagamento digital alpha, usar por sua conta"
   s.description = s.summary
 
   s.files         = `git ls-files`.split("\n")
