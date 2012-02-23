@@ -6,7 +6,7 @@
 
 Este é um plugin do Ruby on Rails que permite utilizar o [PagamentoDigital](www.pagamentodigital.com.br).
 
-## SOBRE O PagamentoDigital
+## SOBRE O PAGAMENTO DIGITAL
 
 ### Retorno Automático
 
