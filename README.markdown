@@ -28,7 +28,7 @@ O primeiro passo é instalar a biblioteca. Para isso, basta executar o comando
 Adicione a biblioteca ao arquivo Gemfile:
 
 ~~~.ruby
-gem "PagamentoDigital", "~> 0.0.1"
+gem "pagamento_digital", "~> 0.0.1"
 ~~~
 
 Lembre-se de utilizar a versão que você acabou de instalar.
