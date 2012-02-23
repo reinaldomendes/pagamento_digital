@@ -1,0 +1,64 @@
+<%
+hash_fields = {}
+
+options[:url_retorno] = options.fetch(:url_retorno, PagamentoDigital.config["url_retorno"])
+if  options[:url_retorno].present? 
+  #URL completa para onde seu cliente será direcionado depois da finalização do pedido no Pagamento Digital.
+  hash_fields = hash_fields.merge!  (
+    {
+      "url_retorno" => options[:url_retorno],
+      "redirect" => 'true',
+      "redirect_time" => options.fetch(:redirect_time, PagamentoDigital.config["redirect_time"])
+    }
+  )
+end
+
+
+options[:url_aviso] = options.fetch(:url_aviso, PagamentoDigital.config["url_aviso"])
+if options[:url_aviso].present?
+  hash_fields = hash_fields.merge!  "url_aviso" => options[:url_aviso]
+end
+
+hash_fields = hash_fields.merge! ({ 
+    #"encoding" => 'UTF-8',
+    'email_loja' => options.fetch(:email, PagamentoDigital.config["email"]),
+    'tipo_integracao' => 'PAD',
+    'id_pedido' => order.id,
+    'frete' => order.frete
+  } )
+
+
+order.products.each_with_index do |product, i| 
+  i+=1
+  hash_fields = hash_fields.merge! ({ 
+      :"produto_qtde_#{i}" => product[:qtde],
+      :"produto_codigo_#{i}" => product[:id],
+      :"produto_descricao_#{i}" => product[:descricao],
+      :"produto_valor_#{i}" => product[:preco],
+
+    })
+end
+
+order.billing.each do |name, value|
+  key = PagamentoDigital::Order::BILLING_MAPPING[name.to_sym]  
+  hash_fields[key] = value
+end
+
+to_gen_md5 = hash_fields.sort {|a,b| a[0].to_s <=> b[0].to_s }.map{|key,value|
+  "#{key}=#{URI.escape(value.to_s)}"
+}.join('&')
+hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
+
+
+%>
+
+<%=to_gen_md5%>
+
+<form action="<%=PagamentoDigital.gateway_url%>" method='post' >
+  <%= hash_fields.map{ |k,v| label_tag{text_field_tag(k,v)+k} }.join("\n<br/>").html_safe   %>
+  <%= submit_tag options[:submit] %>
+</form>
+
+<script>
+  document.getElementById('pagamento_digital_form').style.display='';
+</script>
