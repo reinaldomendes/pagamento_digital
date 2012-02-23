@@ -37,13 +37,21 @@ module PagamentoDigital
 
     #    # Map payment method from PagamentoDigital.
     #    #
-    #    PAYMENT_METHOD = {
-    #      "Cartão de Crédito" => :credit_card,
-    #      "Boleto Bancário"            => :boleto,
-    #      "Pagamento"         => :PagamentoDigital,
-    #      "Pagamento Online"  => :online_transfer,
-    #      "Doação"            => :donation
-    #    }
+    PAYMENT_METHOD = {
+      "Boleto Bancário"                       => :boleto,
+      "Visa"                                  => :credicard_visa,
+      "Mastercard"                            => :credicard_mastercard,
+      "American Express"                      => :credicard_amex,
+      "Diners"                                => :credicard_diners,
+      "Aura"                                  => :credicard_aura,
+      "HiperCard"                             => :credicard_hiper,
+      "Transferência OnLine Banco do Brasil"  => :trans_bb,
+      "Transferência OnLine Bradesco"         => :trans_bradesco,
+      "Transferência OnLine Itaú"             => :trans_itau,
+      "Transferência OnLine Banrisul"         => :trans_banrisul,
+      "Transferência OnLine HSBC"             => :trans_hsbc,      
+      
+    }
 
     # The Rails params hash.
     #
@@ -71,9 +79,9 @@ module PagamentoDigital
     #
     def denormalize(hash)
       return hash
-#            each_value(hash) do |value|
-#              Utils.to_iso8859(value)
-#            end
+      #            each_value(hash) do |value|
+      #              Utils.to_iso8859(value)
+      #            end
     end
 
     # Return a list of produtos sent by PagamentoDigital.
@@ -137,7 +145,7 @@ module PagamentoDigital
     # Will be mapped to the PAYMENT_METHOD constant.
     #
     def payment_method
-      @payment_method ||= params[:payment_method]#PAYMENT_METHOD[mapping_for()]
+      @payment_method ||= PAYMENT_METHOD[mapping_for()]
     end
 
     # Parse the processing date to a Ruby object.

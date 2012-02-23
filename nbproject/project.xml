@@ -5,6 +5,7 @@
         <data xmlns="http://www.netbeans.org/ns/ruby-project/1">
             <name>pagamento_digital</name>
             <source-roots>
+                <root id="src.templates.dir"/>
                 <root id="src.dir"/>
                 <root id="lib.dir"/>
             </source-roots>

@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PagamentoDigital
   class Order
     # Map all billing attributes that will be added as form inputs.
@@ -78,7 +79,7 @@ module PagamentoDigital
     # - fees (Optional. If float, will be multiplied by 100 cents)
     def <<(options)
       options = {
-        :valor => nil,                
+        :preco => nil,                
         :qtde => 1        
       }.merge(options)
 

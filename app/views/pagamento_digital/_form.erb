@@ -1,7 +1,7 @@
 <%
 hash_fields = {}
 
-options[:url_retorno] = options.fetch(:url_retorno, PagamentoDigital.config["url_retorno"])
+options[:url_retorno] = options.fetch(:url_retorno, PagamentoDigital.config["return_to"])
 if  options[:url_retorno].present? 
   #URL completa para onde seu cliente será direcionado depois da finalização do pedido no Pagamento Digital.
   hash_fields = hash_fields.merge!  (
@@ -15,6 +15,7 @@ end
 
 
 options[:url_aviso] = options.fetch(:url_aviso, PagamentoDigital.config["url_aviso"])
+options[:url_aviso] ||= options[:url_retorno]
 if options[:url_aviso].present?
   hash_fields = hash_fields.merge!  "url_aviso" => options[:url_aviso]
 end

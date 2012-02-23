@@ -13,7 +13,7 @@ module PagamentoDigital
       orders = YAML.load_file(ORDERS_FILE) || {}
 
       # add a new order, associating it with the order id
-      orders[params[:id_transacao]] = params.except(:controller, :action, :only_path, :authenticity_token)
+      orders[params[:id_pedido]] = params.except(:controller, :action, :only_path, :authenticity_token)
 
       # save the file
       File.open(ORDERS_FILE, "w+") do |file|
