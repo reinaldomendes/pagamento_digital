@@ -4,7 +4,7 @@ module PagamentoDigital
     
     ORDERS_FILE = File.join(Rails.root, "tmp", "pagamento_digital-#{Rails.env}.yml")
 
-    def create
+    def create      
       # create the orders file if doesn't exist
       FileUtils.touch(ORDERS_FILE) unless File.exist?(ORDERS_FILE)
 
@@ -21,7 +21,9 @@ module PagamentoDigital
       end
 
       # redirect to the configuration url            
-      return redirect_to PagamentoDigital.config["return_to"] + "?id_pedido=#{params[:id_pedido]}" 
+      redirect = PagamentoDigital.config["return_to"].gsub(/\/?(.*)/,"/\\1")      
+      
+      return redirect_to redirect + "?id_pedido=#{params[:id_pedido]}" 
     end
   end
 end

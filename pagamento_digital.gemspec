@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Reinaldo Mendes"]
   s.email       = ["reinaldombox-blog@yahoo.com.br"]
-#  s.homepage    = "http://rubygems.org/gems/pagseguro"
+  s.homepage    = "http://rubygems.org/gems/pagamento_digital"
   s.summary     = "Pagamento digital alpha, usar por sua conta"
   s.description = s.summary
 
