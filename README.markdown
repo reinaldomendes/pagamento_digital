@@ -10,7 +10,7 @@ Este é um plugin do Ruby on Rails que permite utilizar o [PagamentoDigital](www
 
 ### Retorno Automático
 
-Após o processo de compra e pagamento, o usuário é enviado de volta a seu site. Para isso, você deve configurar uma [URL de retorno](https://PagamentoDigital.uol.com.br/Security/ConfiguracoesWeb/RetornoAutomatico.aspx).
+Após o processo de compra e pagamento, o usuário é enviado de volta a seu site. Para isso, você deve configurar uma [URL de retorno](https://www.pagamentodigital.com.br/site/Integracao/RetornoAutomatico).
 
 Antes de enviar o usuário para essa URL, o robô do PagamentoDigital faz um POST para ela, em segundo plano, com os dados e status da transação. Lendo esse POST, você pode obter o status do pedido. Se o pagamento entrou em análise, ou se o usuário pagou usando boleto bancário, o status será "Aguardando Pagamento" ou "Em Análise". Nesses casos, quando a transação for confirmada (o que pode acontecer alguns dias depois) a loja receberá outro POST, informando o novo status. **Cada vez que a transação muda de status, um POST é enviado.**
 

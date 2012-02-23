@@ -54,14 +54,15 @@ module PagamentoDigital
       order["cliente_cidade"] = Faker.city
       order["cliente_estado"] = Faker.state
       
-      order["CliCEP"] = Faker.zipcode
-      order["cliente_cep"] = Faker.phone_number
+      order["cliente_cep"] = Faker.zipcode
+      order["cliente_telefone"] = Faker.phone_number
+      order["cliente_celular"] = Faker.phone_number
 
       # Set the transaction date
       order["data_transacao"] = Time.now.strftime("%d/%m/%Y %H:%M:%S")
 
       # Replace the order id to the correct name
-      order["id_pedido"] = order.delete("ref_transacao")
+      order["id_pedido"] = order.delete("id_pedido")
       
 
       to_price = proc do |price|
@@ -71,7 +72,7 @@ module PagamentoDigital
           "0.00"
         end
       end
-
+      sum_valor_produtos = 0
       index = 0
       loop do
         index+=1
@@ -80,8 +81,16 @@ module PagamentoDigital
         order["produto_descricao_#{index}"] = order.delete("produto_descricao_#{index}")
         order["produto_valor_#{index}"] = to_price.call(order.delete("produto_valor_#{index}"))
         order["produto_qtde_#{index}"] = order.delete("produto_qtde_#{index}")        
+        #soma produtos
+        sum_valor_produtos += order["produto_valor_#{index}"].to_f
       end
-
+      
+      order['frete'] = to_price.call(order.delete "frete")
+      
+      order['valor_original'] = sum_valor_produtos + order['frete'].to_f
+      order['valor_loja'] = order['valor_original']
+      order['valor_total'] = order['valor_loja'] + 1.5#taxa só para sacanear
+      
       # Retrieve the specified status or default to :completed
       status = env.fetch("COD_STATUS", :aprovada).to_sym
 
@@ -93,6 +102,9 @@ module PagamentoDigital
 
       # Set note
       order["free"] = env["NOTE"].to_s
+      
+      
+      
 
       # Retrieve index
       index = proc do |hash, value|
@@ -109,8 +121,14 @@ module PagamentoDigital
 
       # Finally, ping the configured return URL      
       
-      uri = URI.parse File.join(PagamentoDigital.config["base"], PagamentoDigital.config["return_to"])      
-      Net::HTTP.post_form uri, order
+      uri = URI.parse File.join(PagamentoDigital.config["base"], PagamentoDigital.config["return_to"])            
+      response = Net::HTTP.post_form uri, order
+      basedir = "#{Rails.root}/tmp/pagamento_digital"
+      FileUtils.makedirs basedir
+      tmp = File.open("#{basedir}/#{order['id_pedido']}.html",'w'){|out| out <<  PagamentoDigital::Utils.to_utf8(response.body)}
+      puts "saida salva em #{tmp.path}"
+        
+      
     end
   end
 end

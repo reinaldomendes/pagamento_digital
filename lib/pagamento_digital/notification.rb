@@ -245,14 +245,3 @@ end
 
 
 
-#JA_FOI rescue JA_FOI = 0 
-#if JA_FOI
-#  ActionController::Base.class_eval do
-#    before_filter do       
-#      PagamentoDigital.send :remove_const , :Notification
-#      load __FILE__      
-#    end
-#  end
-#  Object.send :remove_const, :JA_FOI
-#  JA_FOI = 1
-#end
