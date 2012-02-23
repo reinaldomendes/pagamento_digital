@@ -10,15 +10,12 @@ def pagamento.config
   }
 end
 def pagamento.reload
-  
+  self
 end
 
 
 ################################################################################
 #_pagamento = FormaPagamento.find_by_chave('pagamento_digital')
-ActionDispatch::Callbacks.before do
-  _pagamento = _pagamento.reload #reload after callback
-end
 lambda_retorno = lambda{Rails.application.routes.url_helpers.send :pagamento_digital_retorno_path }
 
 #redirect após pagamento
@@ -26,7 +23,7 @@ return_to   lambda_retorno
 #notificaçoes retorno automático
 url_aviso   lambda_retorno
 #email da loja
-email  lambda{_pagamento.config[:email]}
+email  lambda{_pagamento.reload.config[:email]}
 #token gerado para sua conta
 authenticity_token lambda{_pagamento.config[:token]}
 

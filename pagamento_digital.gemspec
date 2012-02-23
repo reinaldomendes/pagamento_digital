@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "pagamento_digital"
   s.version     = PagamentoDigital::Version::STRING
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Nando Vieira"]
-  s.email       = ["fnando.vieira@gmail.com"]
+  s.authors     = ["Reinaldo Mendes"]
+  s.email       = ["reinaldombox-blog@yahoo.com.br"]
 #  s.homepage    = "http://rubygems.org/gems/pagseguro"
 #  s.summary     = "The official PagSeguro library"
   s.description = s.summary
