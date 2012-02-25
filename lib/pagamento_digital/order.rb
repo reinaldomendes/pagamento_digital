@@ -34,7 +34,7 @@ module PagamentoDigital
     
     
     def frete= value
-      @frete = convert_unit(value, 100)
+      @frete = convert_unit(value, 2)
     end
     def frete
       @frete
@@ -86,7 +86,7 @@ module PagamentoDigital
       # convert shipping to cents
       #options[:frete] = convert_unit(options[:frete], 100)
       # convert price to cents
-      options[:preco] = convert_unit(options[:preco], 100)
+      options[:preco] = convert_unit(options[:preco], 2)
       products.push(options)
     end
 
