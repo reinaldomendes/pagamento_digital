@@ -67,9 +67,9 @@ module PagamentoDigital
 
       to_price = proc do |price|
         if price.to_s =~ /^(.*?)[,\.](.*?)$/
-          "#{$1}.#{$2}".to_f.round
+          "#{$1}.#{$2}"
         else
-          "0.00".to_f.round
+          "0.00"
         end
       end
       sum_valor_produtos = 0
