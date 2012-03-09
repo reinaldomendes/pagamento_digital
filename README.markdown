@@ -28,7 +28,7 @@ O primeiro passo é instalar a biblioteca. Para isso, basta executar o comando
 Adicione a biblioteca ao arquivo Gemfile:
 
 ~~~.ruby
-gem "pagamento_digital", "~> 0.0.1"
+gem "pagamento_digital"
 ~~~
 
 Lembre-se de utilizar a versão que você acabou de instalar.
@@ -237,18 +237,6 @@ Esta biblioteca assume que você está usando UTF-8 como codificação de seu pr
 
 Se você usa sua aplicação como ISO-8859-1, esta biblioteca NÃO IRÁ FUNCIONAR. Nenhum patch dando suporte ao ISO-8859-1 será aplicado; você sempre pode manter o seu próprio fork, caso precise.
 
-## TROUBLESHOOTING
-
-**Quero utilizar o servidor em Python para testar o retorno automático, mas recebo OpenSSL::SSL::SSLError (SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B)**
-
-Neste caso, você precisa forçar a validação do POST enviado. Basta acrescentar a linha:
-
-~~~.ruby
-PagamentoDigital_notification do |notification|
-  notification.valid?(:force => true)
-  # resto do codigo...
-end
-~~~
 
 ## AUTOR:
 
