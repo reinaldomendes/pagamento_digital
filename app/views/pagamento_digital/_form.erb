@@ -47,7 +47,7 @@ end
 
 to_gen_md5 = hash_fields.sort {|a,b| a[0].to_s <=> b[0].to_s }.map{|key,value|
   "#{key}=#{URI.escape(value.to_s)}"
-}.join('&')
+}.join('&')+PagamentoDigital.config[:token]
 hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
 
 
