@@ -16,7 +16,7 @@ end
 
 ################################################################################
 #_pagamento = FormaPagamento.find_by_chave('pagamento_digital')
-lambda_retorno = lambda{Rails.application.routes.url_helpers.send :pagamento_digital_retorno_path }
+lambda_retorno = lambda{Rails.application.routes.url_helpers.send :pagamento_digital_retorno_url }
 
 #redirect após pagamento
 return_to   lambda_retorno
@@ -36,8 +36,8 @@ end
 
 #production do
 #  #developer false    
-##  email  lambda{pagamento.config[:email]}
-##  authenticity_token lambda{pagamento.config[:token]}
+##  email  lambda{_pagamento.reload.config[:email]}
+##  authenticity_token lambda{_pagamento.reload.config[:token]}
 #end
   
   

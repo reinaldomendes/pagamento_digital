@@ -41,7 +41,7 @@ O arquivo de configuração gerado será parecido com isto:
 
 ~~~.rb
 #...
-lambda_retorno = lambda{Rails.application.routes.url_helpers.send :pagamento_digital_retorno_path }
+lambda_retorno = lambda{Rails.application.routes.url_helpers.send :pagamento_digital_retorno_url }
 
 #redirect após pagamento
 return_to   lambda_retorno
