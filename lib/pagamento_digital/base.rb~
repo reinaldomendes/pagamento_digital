@@ -58,7 +58,7 @@ module PagamentoDigital
   
   class Configuration < HashWithIndifferentAccess
     ENVS = [:development,:test,:production]
-    CONFIGS = [:authenticity_token,:return_to,:developer,:base,:email,:url_aviso,:redirect_time]
+    CONFIGS = [:authenticity_token,:return_to,:developer,:base,:email,:url_aviso]
     def initialize(is_environment=false,&block)
       @is_enviroment = is_environment
       @_eval = false

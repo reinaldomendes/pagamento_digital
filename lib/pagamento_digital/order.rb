@@ -1,6 +1,7 @@
 # encoding: utf-8
 module PagamentoDigital
   class Order
+    include ActionView::Helpers::NumberHelper
     # Map all billing attributes that will be added as form inputs.
     BILLING_MAPPING = {
       :nome                  => "nome",
@@ -96,7 +97,9 @@ module PagamentoDigital
 
     private
     def convert_unit(number, unit)
+      
       number = number.to_f.round(unit) rescue 0
+      number = number_with_precision number, :precision => unit, :separator => '.', :delimiter => ' '
       number
     end
   end

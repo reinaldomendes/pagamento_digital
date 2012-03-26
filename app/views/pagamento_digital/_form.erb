@@ -42,16 +42,19 @@ end
 
 order.billing.each do |name, value|
   key = PagamentoDigital::Order::BILLING_MAPPING[name.to_sym]  
+  value = number_with_precision value, :precision => 2, :separator => '.', :delimiter => ' ' if ['desconto'].include? name.to_s
   hash_fields[key] = value
 end
 
 to_gen_md5 = hash_fields.sort {|a,b| a[0].to_s <=> b[0].to_s }.map{|key,value|
   "#{key}=#{URI.escape(value.to_s)}"
 }.join('&')+PagamentoDigital.config[:authenticity_token]
-hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
+
+#hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
 
 
 %>
+<%=to_gen_md5.html_safe%>
 
 
 
@@ -61,5 +64,5 @@ hash_fields[:hash] = Digest::MD5.hexdigest(to_gen_md5)
 </form>
 
 <%#*<script>%>
-  <%#*document.getElementById('pagamento_digital_form').style.display='';%>
+<%#*document.getElementById('pagamento_digital_form').style.display='';%>
 <%#*</script>%>
